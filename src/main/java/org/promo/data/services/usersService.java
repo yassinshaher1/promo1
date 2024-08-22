@@ -4,6 +4,7 @@ import org.promo.data.data.users;
 import org.promo.data.data.usersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 public class usersService {
@@ -15,13 +16,12 @@ public class usersService {
         this.usersRepository = usersRepository;
     }
 
-    public boolean checkUserpresent(users users){
+    public void checkUserPresent(users users){
         Optional<users> existingUser = usersRepository.selectByMsisdn((users.msisdn()));
 
         if (existingUser.isPresent()){
-            return true;
         }else{
-            return false;
+            usersRepository.insertUser(users.msisdn(), LocalDateTime.now());
         }
     }
 
