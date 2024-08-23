@@ -18,4 +18,7 @@ public interface usersRepository extends CrudRepository<users, String> {// add t
             "VALUES (:msisdn, :created_at)\n")
     Optional<users> insertUser(String msisdn, LocalDateTime time);
 
+    @Query("SELECT user_id FROM users WHERE msisdn = : msisdn")
+    Integer getIdWithMsisdn(String msisdn);
+
 }

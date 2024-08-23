@@ -18,10 +18,11 @@ public class promoService {
     public boolean checkPromoPresent(promo promo){
         Optional<promo> existingPromo = promoRepository.selectByPromoId(promo.promoId());
 
-        if ( existingPromo.isPresent()){
-            return true;
-        }else{
-            return false; // code 2
-        }
+        return existingPromo.isPresent();
+//        if ( existingPromo.isPresent()){
+//            return true;
+//        }else{
+//            return false; // code 2
+//        }
     }
 }

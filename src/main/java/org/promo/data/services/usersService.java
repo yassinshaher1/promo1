@@ -24,7 +24,4 @@ public class usersService {
             usersRepository.insertUser(users.msisdn(), LocalDateTime.now());
         }
     }
-
-
-
 }
