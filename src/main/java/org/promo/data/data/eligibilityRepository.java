@@ -23,5 +23,14 @@ public interface eligibilityRepository extends CrudRepository<eligibility, Strin
     @Query("SELECT * FROM eligibility WHERE user_id = : user_id")
     Optional<eligibility> getEligibilityWithUserId(Integer userId);
 
+    @Query("SELECT data_consumed FROM eligibility WHERE promo_id = :promo_id LIMIT 1")
+    Integer dataConsumedByPromoId(Integer promoId);
+
+    @Query("SELECT eligibility_id FROM eligibility WHERE user_id= :user_id ORDER BY created_at DESC LIMIT 1")
+    Integer latestEligibilityIdByUserId(Integer userId);
+
+    @Query("UPDATE eligibility SET status = :status WHERE eligibility_id = :eligibility_id")
+    void updateEligibilityStatus(String Status,Integer eligibilityId);
+
 
 }
