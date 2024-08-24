@@ -10,17 +10,18 @@ import java.util.Optional;
 @Repository
 public interface eligibilityRepository extends CrudRepository<eligibility, String>{// add the <eligibility, String>
 
-    @Query("INSERT INTO eligibility (user_id, promo_id, status, start_time, end_time, data_consumed, created_at\n" +
-            "VALUES (:user_id, :promo_id, :status, :start_time, :end_time, :data_consumed, :created_at")
-    Optional<eligibility> insertEligibility(Integer userId,
-                                            Integer promoId,
-                                            String status,
-                                            LocalDateTime startTime,
-                                            LocalDateTime endTime,
-                                            Integer dataConsumed,
-                                            LocalDateTime createdAt);
+    @Query("INSERT INTO eligibility (user_id, promo_id, status, start_time, end_time, data_consumed, created_at) " +
+            "VALUES (DEFAULT, :promoId, :status, :startTime, :endTime, :dataConsumed, :createdAt)")
+    Optional<eligibility> insertEligibility(
+            Integer promoId,
+            String status,
+            LocalDateTime startTime,
+            LocalDateTime endTime,
+            Integer dataConsumed,
+            LocalDateTime createdAt);
 
-    @Query("SELECT * FROM eligibility WHERE user_id = : user_id")
+
+    @Query("SELECT * FROM eligibility WHERE user_id = :user_id")
     Optional<eligibility> getEligibilityWithUserId(Integer userId);
 
     @Query("SELECT data_consumed FROM eligibility WHERE promo_id = :promo_id LIMIT 1")
