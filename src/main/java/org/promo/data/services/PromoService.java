@@ -34,11 +34,18 @@ public class PromoService {
 
         return existingPromo.isPresent();
 //        if ( existingPromo.isPresent()){
-//            return true;
+//            return true; //code 3 promo available
 //        }else{
 //            return false; // code 2
 //        }
     }
+
+    public Promo getPromo(int promoId){
+        Optional<Promo> promo = promoRepository.selectByPromoId(promoId);
+        return promo.orElse(null);
+    }
+
+
 
     public boolean checkIfRequirmentsMet(Integer promoId, Users users, Integer dataConsumedInMb, Eligibility eligibility){
         try {
@@ -48,7 +55,7 @@ public class PromoService {
             LocalDateTime endTime = eligibility.endTime();
 
             if (LocalDateTime.now().isAfter(endTime) && dataConsumedInMb >= dataRequired){
-                prizeRepository.insertPrize(eligibilityId, "Granted", LocalDateTime.now());
+                prizeRepository.save(new Prize(null, eligibilityId, "Granted", LocalDateTime.now()));
                 eligibilityRepository.updateEligibilityStatus("Done", eligibilityId);
                 return true;// code 4
 

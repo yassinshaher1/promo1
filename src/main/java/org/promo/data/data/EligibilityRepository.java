@@ -1,5 +1,6 @@
 package org.promo.data.data;
 
+import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -31,6 +32,7 @@ public interface EligibilityRepository extends CrudRepository<Eligibility, Strin
     @Query("SELECT eligibility_id FROM eligibility WHERE user_id= :userId ORDER BY created_at DESC LIMIT 1")
     Integer latestEligibilityIdByUserId(Integer userId);
 
+    @Modifying
     @Query("UPDATE eligibility SET status = :status WHERE eligibility_id = :eligibilityId")
     void updateEligibilityStatus(String status,Integer eligibilityId);
 

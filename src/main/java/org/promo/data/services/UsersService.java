@@ -1,5 +1,6 @@
 package org.promo.data.services;
 
+import org.promo.data.data.Promo;
 import org.promo.data.data.Users;
 import org.promo.data.data.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,10 @@ public class UsersService {
 //            usersRepository.save(new users(null, users.msisdn(), LocalDateTime.now()));
             usersRepository.insertUser(users.msisdn(), LocalDateTime.now());
         }
+    }
+
+    public Users getUser(String msisdn){
+        Optional<Users> User = usersRepository.selectByMsisdn(msisdn);
+        return User.orElse(null);
     }
 }

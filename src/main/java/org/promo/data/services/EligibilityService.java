@@ -57,5 +57,10 @@ public class EligibilityService {
 
     }
 
+    public Eligibility getEligibility(Integer userId){
+        Optional<Eligibility> eligibility = eligibilityRepository.getEligibilityWithUserId(userId);
+        return eligibility.orElse(null);
+    }
+
 
 }
