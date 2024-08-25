@@ -15,4 +15,7 @@ public record Eligibility(
         Integer dataConsumed,
         LocalDateTime createdAt
 ) {
+        public static Eligibility UpdateStatus(Eligibility eligibility,String status){
+                return new Eligibility(eligibility.eligibilityId(),eligibility.userId(),eligibility.promoId(),status,LocalDateTime.now(),eligibility.endTime(),eligibility.dataConsumed(),eligibility.createdAt());
+        }
 }

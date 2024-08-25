@@ -51,12 +51,14 @@ public class PromoService {
         try {
             Integer userId = usersRepository.getIdWithMsisdn(users.msisdn());
             Integer dataRequired = eligibilityRepository.dataConsumedByPromoId(promoId);
-            Integer eligibilityId = eligibilityRepository.latestEligibilityIdByUserId(userId);
+//            Integer eligibilityId = eligibilityRepository.latestEligibilityIdByUserId(userId);
             LocalDateTime endTime = eligibility.endTime();
 
             if (LocalDateTime.now().isAfter(endTime) && dataConsumedInMb >= dataRequired){
-                prizeRepository.save(new Prize(null, eligibilityId, "Granted", LocalDateTime.now()));
-                eligibilityRepository.updateEligibilityStatus("Done", eligibilityId);
+                prizeRepository.save(new Prize(null, eligibility.eligibilityId(), "Granted", LocalDateTime.now()));
+//                eligibilityRepository.updateEligibilityStatus("Done", eligibilityId);
+
+                eligibilityRepository.save(Eligibility.UpdateStatus(eligibility,"Done"));
                 return true;// code 4
 
             }else{
