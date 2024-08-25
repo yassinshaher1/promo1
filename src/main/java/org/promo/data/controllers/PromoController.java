@@ -1,29 +1,28 @@
 package org.promo.data.controllers;
 
-import org.promo.data.data.users;
+import org.promo.data.data.Users;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.relational.core.sql.In;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.promo.data.services.eligibilityService;
-import org.promo.data.services.usersService;
+import org.promo.data.services.EligibilityService;
+import org.promo.data.services.UsersService;
 
 
 import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/promo")
-public class promoController {
+public class PromoController {
 
-    private final eligibilityService eligibilityService;
-    private final usersService usersService;
+    private final EligibilityService eligibilityService;
+    private final UsersService usersService;
 
     @Autowired
-    public promoController(eligibilityService eligibilityService,usersService usersService){
+    public PromoController(EligibilityService eligibilityService, UsersService usersService){
         this.eligibilityService = eligibilityService;
         this.usersService = usersService;
     }
@@ -31,7 +30,7 @@ public class promoController {
     @GetMapping("/eligible")
     public ResponseEntity<String> eligibleApi(@RequestParam("msisdn") String msisdn,
                                               @RequestParam("promoId") Integer promoId){
-        users newuser = new users(null, msisdn, LocalDateTime.now());
+        Users newuser = new Users(null, msisdn, LocalDateTime.now());
         try {
             usersService.checkUserPresent(newuser);
             boolean eligible = eligibilityService.userAlreadyRegistered(msisdn, promoId);

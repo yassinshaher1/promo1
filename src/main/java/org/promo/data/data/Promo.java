@@ -2,7 +2,7 @@ package org.promo.data.data;
 
 import java.time.LocalDateTime;
 
-public record promo(
+public record Promo(
         Integer promoId,
         String promoName,
         Integer dataQuota,

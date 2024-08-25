@@ -7,10 +7,10 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface promoRepository extends CrudRepository<promo, String> {// add the <promo, String>
+public interface PromoRepository extends CrudRepository<Promo, String> {// add the <promo, String>
 
     @Query("SELECT * FROM promo WHERE promo_id = :promoId")
-    Optional<promo> selectByPromoId (Integer promoId);
+    Optional<Promo> selectByPromoId (Integer promoId);
 
 
 }

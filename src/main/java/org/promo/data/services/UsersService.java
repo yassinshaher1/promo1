@@ -1,7 +1,7 @@
 package org.promo.data.services;
 
-import org.promo.data.data.users;
-import org.promo.data.data.usersRepository;
+import org.promo.data.data.Users;
+import org.promo.data.data.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,17 +9,17 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
-public class usersService {
+public class UsersService {
 
-    private final usersRepository usersRepository;
+    private final UsersRepository usersRepository;
 
     @Autowired
-    public usersService(usersRepository usersRepository){
+    public UsersService(UsersRepository usersRepository){
         this.usersRepository = usersRepository;
     }
 
-    public void checkUserPresent(users users){
-        Optional<users> existingUser = usersRepository.selectByMsisdn((users.msisdn()));
+    public void checkUserPresent(Users users){
+        Optional<Users> existingUser = usersRepository.selectByMsisdn((users.msisdn()));
 
         if (existingUser.isPresent()){
         }else{

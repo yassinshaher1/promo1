@@ -9,19 +9,19 @@ import java.util.Optional;
 
 
 @Service
-public class promoService {
+public class PromoService {
 
-    private final promoRepository promoRepository;
-    private final usersRepository usersRepository;
+    private final PromoRepository promoRepository;
+    private final UsersRepository usersRepository;
     private final EligibilityRepository eligibilityRepository;
-    private final prizeRepository prizeRepository;
+    private final PrizeRepository prizeRepository;
 
 
     @Autowired
-    public promoService(promoRepository promoRepository,
-                        usersRepository usersRepository,
+    public PromoService(PromoRepository promoRepository,
+                        UsersRepository usersRepository,
                         EligibilityRepository eligibilityRepository,
-                        prizeRepository prizeRepository){
+                        PrizeRepository prizeRepository){
 
         this.promoRepository = promoRepository;
         this.usersRepository = usersRepository;
@@ -29,8 +29,8 @@ public class promoService {
         this.prizeRepository = prizeRepository;
     }
 
-    public boolean checkPromoPresent(promo promo){
-        Optional<promo> existingPromo = promoRepository.selectByPromoId(promo.promoId());
+    public boolean checkPromoPresent(Promo promo){
+        Optional<Promo> existingPromo = promoRepository.selectByPromoId(promo.promoId());
 
         return existingPromo.isPresent();
 //        if ( existingPromo.isPresent()){
@@ -40,7 +40,7 @@ public class promoService {
 //        }
     }
 
-    public boolean checkIfRequirmentsMet(Integer promoId, users users, Integer dataConsumedInMb, Eligibility eligibility){
+    public boolean checkIfRequirmentsMet(Integer promoId, Users users, Integer dataConsumedInMb, Eligibility eligibility){
         try {
             Integer userId = usersRepository.getIdWithMsisdn(users.msisdn());
             Integer dataRequired = eligibilityRepository.dataConsumedByPromoId(promoId);

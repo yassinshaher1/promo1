@@ -2,8 +2,8 @@ package org.promo.data.services;
 
 import org.promo.data.data.Eligibility;
 import org.promo.data.data.EligibilityRepository;
-import org.promo.data.data.users;
-import org.promo.data.data.usersRepository;
+import org.promo.data.data.Users;
+import org.promo.data.data.UsersRepository;
 import org.springframework.stereotype.Service;
 
 
@@ -11,12 +11,12 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
-public class eligibilityService {
+public class EligibilityService {
 
     private final EligibilityRepository eligibilityRepository;
-    private final usersRepository usersRepository;
+    private final UsersRepository usersRepository;
 
-    public eligibilityService(EligibilityRepository eligibilityRepository, usersRepository usersRepoistory) {
+    public EligibilityService(EligibilityRepository eligibilityRepository, UsersRepository usersRepoistory) {
         this.eligibilityRepository = eligibilityRepository;
         this.usersRepository = usersRepoistory;
 
@@ -43,7 +43,7 @@ public class eligibilityService {
         }
     }
 
-    public void addingEligibility(users users, Integer promoId){
+    public void addingEligibility(Users users, Integer promoId){
         try{
             Integer userId = usersRepository.getIdWithMsisdn(users.msisdn());
             LocalDateTime endTime = LocalDateTime.now().plusDays(14);

@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 
-public record users(
+public record Users(
         @Id
         Integer userId,
         String msisdn,
