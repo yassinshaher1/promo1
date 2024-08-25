@@ -13,14 +13,14 @@ public class promoService {
 
     private final promoRepository promoRepository;
     private final usersRepository usersRepository;
-    private final eligibilityRepository eligibilityRepository;
+    private final EligibilityRepository eligibilityRepository;
     private final prizeRepository prizeRepository;
 
 
     @Autowired
     public promoService(promoRepository promoRepository,
                         usersRepository usersRepository,
-                        eligibilityRepository eligibilityRepository,
+                        EligibilityRepository eligibilityRepository,
                         prizeRepository prizeRepository){
 
         this.promoRepository = promoRepository;
@@ -40,7 +40,7 @@ public class promoService {
 //        }
     }
 
-    public boolean checkIfRequirmentsMet(Integer promoId, users users, Integer dataConsumedInMb, eligibility eligibility){
+    public boolean checkIfRequirmentsMet(Integer promoId, users users, Integer dataConsumedInMb, Eligibility eligibility){
         try {
             Integer userId = usersRepository.getIdWithMsisdn(users.msisdn());
             Integer dataRequired = eligibilityRepository.dataConsumedByPromoId(promoId);
