@@ -49,7 +49,7 @@ public class eligibilityService {
             Integer userId = usersRepository.getIdWithMsisdn(users.msisdn());
             LocalDateTime endTime = LocalDateTime.now().plusDays(14);
 
-            eligibilityRepository.insertEligibility(promoId, "Pending", LocalDateTime.now(), endTime, 2000, LocalDateTime.now());
+            eligibilityRepository.insertEligibility(userId, promoId, "Pending", LocalDateTime.now(), endTime, 2000, LocalDateTime.now());
         }catch(Exception e){
             System.out.println("Error in adding eligibility " + e.getMessage());
         }

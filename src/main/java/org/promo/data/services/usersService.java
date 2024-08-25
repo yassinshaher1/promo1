@@ -23,6 +23,7 @@ public class usersService {
 
         if (existingUser.isPresent()){
         }else{
+//            usersRepository.save(new users(null, users.msisdn(), LocalDateTime.now()));
             usersRepository.insertUser(users.msisdn(), LocalDateTime.now());
         }
     }

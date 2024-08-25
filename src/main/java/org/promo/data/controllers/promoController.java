@@ -36,6 +36,7 @@ public class promoController {
             usersService.checkUserPresent(newuser);
             boolean eligible = eligibilityService.userAlreadyRegistered(msisdn, promoId);
             if (!eligible) {
+
                 eligibilityService.addingEligibility(newuser, promoId);
                 return ResponseEntity.ok("User successfully registered for the promo");
             } else {

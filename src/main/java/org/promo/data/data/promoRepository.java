@@ -9,7 +9,7 @@ import java.util.Optional;
 @Repository
 public interface promoRepository extends CrudRepository<promo, String> {// add the <promo, String>
 
-    @Query("SELECT * FROM promo WHERE promo_id = :promo_id")
+    @Query("SELECT * FROM promo WHERE promo_id = :promoId")
     Optional<promo> selectByPromoId (Integer promoId);
 
 

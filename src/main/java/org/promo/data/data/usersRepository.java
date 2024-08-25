@@ -12,14 +12,13 @@ import java.util.Optional;
 public interface usersRepository extends CrudRepository<users, String> {// add the <users, String>
 
     @Query("SELECT * FROM users WHERE msisdn = :msisdn LIMIT 1")
-    Optional<users> selectByMsisdn(@Param("msisdn") String msisdn);
+    Optional<users> selectByMsisdn(String msisdn);
 
 //    LocalDateTime time = LocalDateTime.now();
-    @Query("INSERT INTO users (msisdn, created_at)\n" +
-            "VALUES (:msisdn, :created_at)\n")
-    Optional<users> insertUser(@Param("msisdn") String msisdn, @Param("createdAt") LocalDateTime createdAt);
+    @Query("INSERT INTO users (msisdn, created_at) VALUES (:msisdn, :createdAt)")
+    void insertUser(String msisdn, LocalDateTime createdAt);
 
     @Query("SELECT user_id FROM users WHERE msisdn = :msisdn")
-    Integer getIdWithMsisdn(@Param("msisdn")String msisdn);
+    Integer getIdWithMsisdn(String msisdn);
 
 }
