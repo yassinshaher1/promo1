@@ -61,7 +61,14 @@ public class PromoService {
                 eligibilityRepository.save(Eligibility.UpdateStatus(eligibility,"Done"));
                 return true;// code 4
 
-            }else{
+            }else if(LocalDateTime.now().isBefore(endTime)||LocalDateTime.now().isEqual(endTime) && dataConsumedInMb >= dataRequired){
+                prizeRepository.save(new Prize(null, eligibility.eligibilityId(), "Granted", LocalDateTime.now()));
+//                eligibilityRepository.updateEligibilityStatus("Done", eligibilityId);
+
+                eligibilityRepository.save(Eligibility.UpdateStatus(eligibility,"Done"));
+                return true;// code 4
+            }
+            else{
                 return false; //code 5
             }
         }catch(Exception e){

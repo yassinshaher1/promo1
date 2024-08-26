@@ -84,7 +84,7 @@ public class PromoController {
                 if (promoService.checkIfRequirmentsMet(promoId, user, dataConsumedInMb, eligibility)) {
                     return ResponseEntity.ok("Prize granted");
                 } else {
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Prize lost");
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Requirements are not met");
                 }
             }else{
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Promo not found");
