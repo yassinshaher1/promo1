@@ -30,7 +30,6 @@ public class EligibilityService {
             Optional<Eligibility> data = eligibilityRepository.getEligibilityWithUserId(userId);
             if (data.isPresent()){
                 if (data.get().endTime().isAfter(LocalDateTime.now()) && data.get().endTime().isEqual(LocalDateTime.now()) && data.get().status().equals(EligibilityStatus.PENDING)){
-                    //end_time has passed, a new one can be added
                     flag = true; //code 0
                 }
             }
