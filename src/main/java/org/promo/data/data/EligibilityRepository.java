@@ -1,5 +1,6 @@
 package org.promo.data.data;
 
+import org.promo.data.services.EligibilityStatus;
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -34,7 +35,7 @@ public interface EligibilityRepository extends CrudRepository<Eligibility, Strin
 
     @Modifying
     @Query("UPDATE eligibility SET status = :status WHERE eligibility_id = :eligibilityId")
-    void updateEligibilityStatus(String status,Integer eligibilityId);
+    void updateEligibilityStatus(EligibilityStatus status, Integer eligibilityId);
 
 
 }

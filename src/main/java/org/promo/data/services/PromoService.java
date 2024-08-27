@@ -55,17 +55,17 @@ public class PromoService {
             LocalDateTime endTime = eligibility.endTime();
 
             if (LocalDateTime.now().isAfter(endTime) && dataConsumedInMb >= dataRequired){
-                prizeRepository.save(new Prize(null, eligibility.eligibilityId(), "Granted", LocalDateTime.now()));
+                prizeRepository.save(new Prize(null, eligibility.eligibilityId(), PrizeStatus.GRANTED, LocalDateTime.now()));
 //                eligibilityRepository.updateEligibilityStatus("Done", eligibilityId);
 
-                eligibilityRepository.save(Eligibility.UpdateStatus(eligibility,"Done"));
+                eligibilityRepository.save(Eligibility.UpdateStatus(eligibility,EligibilityStatus.DONE));
                 return true;// code 4
 
             }else if(LocalDateTime.now().isBefore(endTime)||LocalDateTime.now().isEqual(endTime) && dataConsumedInMb >= dataRequired){
-                prizeRepository.save(new Prize(null, eligibility.eligibilityId(), "Granted", LocalDateTime.now()));
+                prizeRepository.save(new Prize(null, eligibility.eligibilityId(), PrizeStatus.GRANTED, LocalDateTime.now()));
 //                eligibilityRepository.updateEligibilityStatus("Done", eligibilityId);
 
-                eligibilityRepository.save(Eligibility.UpdateStatus(eligibility,"Done"));
+                eligibilityRepository.save(Eligibility.UpdateStatus(eligibility,EligibilityStatus.DONE));
                 return true;// code 4
             }
             else{

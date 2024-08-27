@@ -29,7 +29,7 @@ public class EligibilityService {
         if(userId != null){
             Optional<Eligibility> data = eligibilityRepository.getEligibilityWithUserId(userId);
             if (data.isPresent()){
-                if (data.get().endTime().isAfter(LocalDateTime.now()) && data.get().endTime().isEqual(LocalDateTime.now()) && data.get().status().equals("Pending")){
+                if (data.get().endTime().isAfter(LocalDateTime.now()) && data.get().endTime().isEqual(LocalDateTime.now()) && data.get().status().equals(EligibilityStatus.PENDING)){
                     //end_time has passed, a new one can be added
                     flag = true; //code 0
                 }
@@ -43,7 +43,7 @@ public class EligibilityService {
             Integer userId = usersRepository.getIdWithMsisdn(users.msisdn());
             LocalDateTime endTime = LocalDateTime.now().plusDays(14);
 
-            eligibilityRepository.save(new Eligibility(null, userId, promoId, "Pending", LocalDateTime.now(), endTime, 2000, LocalDateTime.now()));
+            eligibilityRepository.save(new Eligibility(null, userId, promoId, EligibilityStatus.PENDING, LocalDateTime.now(), endTime, 2000, LocalDateTime.now()));
 //            Optional<eligibility> pending = eligibilityRepository.insertEligibility(userId, promoId, "Pending", LocalDateTime.now(), endTime, 2000, LocalDateTime.now());
 //            System.out.println(pending);
         }catch(Exception e){
