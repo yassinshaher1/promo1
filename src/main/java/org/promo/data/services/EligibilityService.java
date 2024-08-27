@@ -23,24 +23,19 @@ public class EligibilityService {
     }
 
     public boolean userAlreadyRegistered(String msisdn, Integer promoId){
+        boolean flag = false;
+
         Integer userId = usersRepository.getIdWithMsisdn(msisdn);
         if(userId != null){
             Optional<Eligibility> data = eligibilityRepository.getEligibilityWithUserId(userId);
             if (data.isPresent()){
-                if (data.get().endTime().isBefore(LocalDateTime.now()) && data.get().status().equals("Ended")){
+                if (data.get().endTime().isAfter(LocalDateTime.now()) && data.get().endTime().isEqual(LocalDateTime.now()) && data.get().status().equals("Pending")){
                     //end_time has passed, a new one can be added
-                    return false; //code 1
-                }else{
-                    // end_time
-                    return true; //code 0
+                    flag = true; //code 0
                 }
-            }else{
-                // not in the database
-                return false;// code 1
             }
-        }else{
-            return false;
         }
+        return flag;
     }
 
     public void addingEligibility(Users users, Integer promoId){
